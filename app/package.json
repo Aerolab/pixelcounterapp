@@ -1,0 +1,20 @@
+{
+  "name": "pixelcounter",
+  "main": "views/index.html",
+  "version": "0.0.1",
+  "single-instance": true,
+  "window": {
+    "title": "PixelCounter",
+    "frame": false,
+    "toolbar": false,
+    "resizable": false,
+    "position": "mouse",
+    "width": 400,
+    "height": 420,
+    "min_width": 400,
+    "min_height": 420,
+    "max_width": 400,
+    "max_height": 420
+  },
+  "chromium-args": "--child-clean-exit"
+}

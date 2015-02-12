@@ -1,0 +1,83 @@
+{
+  "products": [
+  {
+	  	"SKU": "1",
+	  	"name": "Octopus T-Shirt",
+	  	"category": ["tshirt"],
+	  	"price": "16.00",
+	  	"img": "tshirt03.jpg",
+	  	"tshirt": true,
+	  	"sale": false
+  	},
+  	{
+	  	"SKU": "2",
+	  	"name": "JS Heart T-Shirt",
+	  	"category": ["tshirt"],
+	  	"price": "16.00",
+	  	"img": "tshirt01.jpg",
+	  	"tshirt": true,
+	  	"sale": false
+  	},
+  	{
+	  	"SKU": "3",
+	  	"name": "Cool Bag",
+	  	"category": ["sticker"],
+	  	"price": "10.00",
+	  	"img": "bag02.jpg",
+	  	"tshirt": false,
+	  	"sale": true
+  	},
+  	{
+	  	"SKU": "4",
+	  	"name": "Ping Pong Paddles",
+	  	"category": ["cup"],
+	  	"price": "20.00",
+	  	"img": "pong01.jpg",
+	  	"tshirt": false,
+	  	"sale": false
+  	},
+  	{
+	  	"SKU": "5",
+	  	"name": "Octopus T-Shirt",
+	  	"category": ["tshirt"],
+	  	"price": "12.00",
+	  	"img": "tshirt02.jpg",
+	  	"tshirt": true,
+	  	"sale": true
+  	},
+  	{
+	  	"SKU": "6",
+	  	"name": "Cool Bag",
+	  	"category": ["glass"],
+	  	"price": "10.00",
+	  	"img": "bag01.jpg",
+	  	"tshirt": false,
+	  	"sale": false
+  	},{
+	  	"SKU": "7",
+	  	"name": "Octopus T-Shirt",
+	  	"category": ["tshirt"],
+	  	"price": "16.00",
+	  	"img": "tshirt03.jpg",
+	  	"tshirt": true,
+	  	"sale": false
+  	},
+  	{
+	  	"SKU": "8",
+	  	"name": "JS Heart T-Shirt",
+	  	"category": ["tshirt"],
+	  	"price": "16.00",
+	  	"img": "tshirt01.jpg",
+	  	"tshirt": true,
+	  	"sale": false
+  	},
+  	{
+	  	"SKU": "9",
+	  	"name": "Cool Bag",
+	  	"category": ["sticker"],
+	  	"price": "10.00",
+	  	"img": "bag02.jpg",
+	  	"tshirt": false,
+	  	"sale": true
+  	}]
+ }
