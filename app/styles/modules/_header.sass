@@ -1,5 +1,7 @@
 nav
   padding: 15px
+  -webkit-app-region: drag
+  -webkit-user-select: none
   // border: solid 1px red
   @extend .clearfix
   > *
@@ -10,6 +12,7 @@ nav
     height: 14px
     border-radius: 50%
     float: left
+    -webkit-app-region: no-drag
   #close
     margin-right: 7px
     background: #b44444
@@ -25,6 +28,7 @@ nav
     color: white
     width: 50%
     text-align: center
+    cursor: normal
   #setting,
   #debug
     font-size: 17px

@@ -249,14 +249,14 @@ module.exports = function (grunt) {
     watch: {
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', '<%= config.app %>/bower_components/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'autoprefixer']
+        tasks: ['sass:dist', 'autoprefixer:dist']
       },
       assemble: {
         files: ['<%= config.app %>/templates/layouts/{,*/}*.hbs',
              '<%= config.app %>/templates/pages/{,*/}*.hbs',
              '<%= config.app %>/templates/partials/{,*/}*.hbs',
              '<%= config.app %>/data/{,*/}*.json'],
-        tasks: ['assemble:server']
+        tasks: ['assemble:dist']
       },
       scripts: {
         files: ['<%= config.app %>/scripts/**/*.js'],
@@ -377,12 +377,20 @@ module.exports = function (grunt) {
       options: {
         browsers: ['last 1 version']
       },
-      dist: {
+      tmp: {
         files: [{
           expand: true,
           cwd: '.tmp/styles/',
           src: '{,*/}*.css',
           dest: '.tmp/styles/'
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'dist/styles/',
+          src: '{,*/}*.css',
+          dest: 'dist/styles/'
         }]
       }
     },
@@ -661,16 +669,25 @@ module.exports = function (grunt) {
     ]);
   });
 
+
   grunt.registerTask('server', function () {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve']);
   });
 
+  grunt.registerTask('watch-build', function () {
+
+    grunt.task.run([
+      'sass:dist',
+      'assemble:dist',
+      'copy:dist',
+      'watch'
+    ]);
+  });
 
   grunt.registerTask('build', [
     'clean:dist',
     'sass',
-    'copy',
     'htmlmin',
     'assemble:dist',
     'useminPrepare',
@@ -682,5 +699,7 @@ module.exports = function (grunt) {
     'modernizr',
     'usemin'
   ]);
+
+
 
 };
