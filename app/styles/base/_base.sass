@@ -1,17 +1,29 @@
-// *
-// 	box-sizing: border-box
-// 	-moz-box-sizing: border-box
+*
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
 
 html,
 body
-	height: 100%
+  height: 100%
 
 body
-	font-family: 'Open Sans', sans-serif
-	font-size: 16px
-	line-height: 26px
-	-webkit-font-smoothing: antialiased
-	color: #5b5b5f
+  font-family: 'Montserrat', sans-serif
+  font-size: 16px
+  line-height: 26px
+  -webkit-font-smoothing: antialiased
+  color: #8d8d8d
+  width: 100%
+.font_number
+  font-family: 'MunroSmall', sans-serif
+
+.wrapper-window
+  border: solid 1px black
+  background: #21242e
+  @include vertical-align
+  margin: 0 auto
+  width: 400px
+  height: 420px
 
 .icon
-	display: inline-block
+  display: inline-block

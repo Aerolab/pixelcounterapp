@@ -2,30 +2,30 @@
  * Includes a webfont in eot, woff, ttf, svg.
  */
 @mixin webfont($family, $font, $weight:normal, $style:normal) {
-    @font-face {
-        font-family: $family;
-        src: url('#{$font}.eot');
-        src: url('#{$font}.woff') format('woff'),
-             url('#{$font}.ttf') format('truetype'),
-             url('#{$font}.svg') format('svg');
-        font-weight: $weight;
-        font-style: $style;
-    }
+  @font-face {
+    font-family: $family;
+    src: url('#{$font}.eot');
+    src: url('#{$font}.woff') format('woff'),
+       url('#{$font}.ttf') format('truetype'),
+       url('#{$font}.svg') format('svg');
+    font-weight: $weight;
+    font-style: $style;
+  }
 }
 
 /*
  * Resets an unsorted list
  */
 @mixin ul-reset() {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 @mixin image-replacement {
-    display: inline-block;
-    text-indent: -1000%;
-    overflow: hidden;
+  display: inline-block;
+  text-indent: -1000%;
+  overflow: hidden;
 }
 
 @mixin vertical-align {
@@ -37,8 +37,9 @@
 }
 
 @mixin no-spinner {
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-    }
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
 }
+

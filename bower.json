@@ -1,10 +1,10 @@
 {
-    "name": "package",
-    "version": "0.0.0",
-    "dependencies": {
-        "modernizr": "~2.8.3",
-        "jquery": "~1.11.2",
-        "normalize-scss": "~3.0.2",
-        "bourbon": "~4.1.1"
-    }
+  "name": "package",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "~2.8.3",
+    "jquery": "~1.11.2",
+    "normalize-scss": "~3.0.2",
+    "bourbon": "~4.1.1"
+  }
 }
