@@ -1,0 +1,66 @@
+.modal
+  width: 100%
+  height: 100%
+  position: absolute
+  bottom: 0
+  z-index: 10
+  background: rgba(black,.65)
+  .setting
+    @include vertical-align
+    margin: 0 auto
+    width: 340px
+    height: 170px
+    background: #7baf62
+    z-index: 11
+    nav
+      padding: 10px 15px
+      background: #689e4f
+      .left,
+      .right
+        line-height: 12px
+        a
+          line-height: inherit
+          i
+            line-height: inherit
+      .right
+        text-align: right
+    .filter
+      position: relative
+      height: 137px
+      table
+        @include vertical-align
+        margin: 0 auto 0 45px
+        width: 300px
+        tr:first-child
+          td
+            padding-bottom: 7px
+      label
+        margin-right: 10px
+        font-size: 11px
+        font-weight: bold
+        line-height: 16px
+      label[for="all"],
+      label[for="none"]
+        font-size: 12px
+        &:before
+          margin-right: 2px
+
+input[type=checkbox]
+  position: absolute
+  left: -1000em
+input[type=checkbox] + label:before
+  content: ""
+  display: inline-block
+  width: 16px
+  height: 16px
+  margin: 0 8px 0 0
+  background: url(../images/checkbox_e.svg) no-repeat 0 0
+  vertical-align: bottom
+  position: relative
+  bottom: 2px
+input[type=checkbox]:checked + label:before
+  background: url(../images/checkbox_c.svg) no-repeat 0 0
+input[type=checkbox]:disabled + label:before
+  opacity: .5
+input[type=checkbox]:checked:disabled + label:before
+  opacity: .5

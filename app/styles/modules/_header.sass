@@ -2,6 +2,9 @@ nav
   padding: 15px
   -webkit-app-region: drag
   -webkit-user-select: none
+  cursor: default
+  &:hover
+    cursor: default
   // border: solid 1px red
   @extend .clearfix
   > *
@@ -10,14 +13,23 @@ nav
   #minimizer
     width: 14px
     height: 14px
-    border-radius: 50%
+    //border-radius: 50%
     float: left
     -webkit-app-region: no-drag
+    cursor: pointer
+    &:hover
+      cursor: pointer
   #close
     margin-right: 7px
-    background: #b44444
+    background: url(../images/close.png) 50% 50% no-repeat
+    background-size: 100%
+    &:hover
+      background: url(../images/close_hover.png) 50% 50% no-repeat
   #minimizer
-    background: #4aa850
+    background: url(../images/minimize.png) 50% 50% no-repeat
+    background-size: 100%
+    &:hover
+      background: url(../images/minimize_hover.png) 50% 50% no-repeat
   .left,
   .right
     width: 25%
@@ -28,7 +40,9 @@ nav
     color: white
     width: 50%
     text-align: center
-    cursor: normal
+    cursor: default
+    &:hover
+      cursor: default
   #setting,
   #debug
     font-size: 17px
@@ -36,7 +50,12 @@ nav
     line-height: 13px
     i
       line-height: inherit
+    cursor: pointer
+    &:hover
+      cursor: pointer
   #setting
     margin-left: 7px
   #debug
+    z-index: 1000
+    position: relative
     // display: none

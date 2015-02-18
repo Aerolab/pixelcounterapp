@@ -260,7 +260,7 @@ module.exports = function (grunt) {
       },
       scripts: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['jshint', 'jscs']
+        tasks: ['copy:dist','jshint', 'jscs']
       },
       livereload: {
         options: {
