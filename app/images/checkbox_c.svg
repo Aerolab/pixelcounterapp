@@ -5,9 +5,12 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Artboard-1" sketch:type="MSArtboardGroup">
-            <rect id="Rectangle-2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="4" y="4" width="6" height="6"></rect>
-            <rect id="Rectangle-1" stroke="#FFFFFF" stroke-width="2" sketch:type="MSShapeGroup" x="0" y="0" width="14" height="14"></rect>
+        <g id="Artboard-1" sketch:type="MSArtboardGroup" fill="#FFFFFF">
+            <rect id="Rectangle-9" sketch:type="MSShapeGroup" x="0" y="0" width="2" height="14"></rect>
+            <rect id="Rectangle-5" sketch:type="MSShapeGroup" x="4" y="4" width="6" height="6"></rect>
+            <rect id="Rectangle-6" sketch:type="MSShapeGroup" x="0" y="0" width="14" height="2"></rect>
+            <rect id="Rectangle-7" sketch:type="MSShapeGroup" x="12" y="0" width="2" height="14"></rect>
+            <rect id="Rectangle-8" sketch:type="MSShapeGroup" x="0" y="12" width="14" height="2"></rect>
         </g>
     </g>
 </svg>

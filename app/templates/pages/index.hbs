@@ -1,15 +1,19 @@
 ---
 title: Pixel Counter
 ---
-<section class="draggable dropped">
+{{!--
+  Dragstate
+  class's none=dragfold, drophere=drophover, dropped=folderin
+--}}
+<section class="draggable hidden">
   <div class="intructions">
     <figure class="wrapper-icon">
 
       {{!-- Start --}}
-      {{!-- <img src="images/folder.svg" alt="">
+      <img src="images/folder.svg" alt="">
       <p class="description">
         Drag folder to count
-      </p> --}}
+      </p>
 
       {{!-- Drophere --}}
       {{!-- <img src="images/arrow.png" alt="">
@@ -18,16 +22,18 @@ title: Pixel Counter
       </p> --}}
 
       {{!-- Folder --}}
-      <img src="images/folder.svg" alt="">
+      {{!-- <img src="images/folder.svg" alt="">
       <p class="description">
         <spam class="title">Pictures</spam>
         <br>
-        <spam class="quantity">250 images</spam>
-      </p>
+        <spam class="quantity"><span class="number">250</span> images</spam>
+      </p> --}}
 
     </figure>
   </div>
 </section>
+<a id="start" class="hidden" title="Start Counting">Start Counting</a>
+{{!-- Modal Setting --}}
 <section class="modal">
   <div class="setting">
     <nav>
@@ -97,4 +103,43 @@ title: Pixel Counter
     </div>
   </div>
 </section>
-<a id="start" class="" title="Start Counting">Start Counting</a>
+{{!-- OnCount --}}
+<section class="oncount hidden">
+  <div class="background"></div>
+  <div class="count">
+
+    <div class="reduced">
+      <span class="number">1.564</span>
+      <span class="unit">M</span>
+    </div>
+    <div class="full">
+      <span class="number">1.564.514.543</span>
+    </div>
+
+  </div>
+</section>
+{{!-- Finish --}}
+<section class="finish">
+
+  <div class="wrapper-result">
+    <div class="result">
+      <div class="reduced">
+        <span class="number">1.564</span>
+        <span class="unit">M</span>
+      </div>
+      <div class="full">
+        <span class="number">1.564.514.543</span>
+        <span class="unit">pixels</span>
+      </div>
+      <div class="folder">
+        in '<span class="name">Pictures</span>'
+      </div>
+    </div>
+  </div>
+  <div class="wrapper-cta">
+    <a id="start-over" class="" title="Start Over">Start over</a>
+    <a id="shared-twitter" class="" title="Shared Twitter"><i class="fa fa-twitter"></i></a>
+    <a id="shared-facebook" class="" title="Shared Facebook"><i class="fa fa-facebook"></i></a>
+  </div>
+</section>
+
