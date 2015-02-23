@@ -5,7 +5,7 @@ $(document).ready(function() {
     event.preventDefault();
     win.showDevTools();
   });
-  $('#minimizer').click(function(event) {
+  $('#minimize').click(function(event) {
     event.preventDefault();
     win.minimize();
   });
