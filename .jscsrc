@@ -1,0 +1,17 @@
+{
+	"preset": "jquery",
+	"requireSpaceBeforeBlockStatements": true,
+	"validateQuoteMarks": "'",
+	"requireSpaceAfterBinaryOperators": true,
+	"requireSpaceBeforeBinaryOperators": true,
+	"requireSpaceAfterKeywords": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"switch",
+		"try",
+		"catch"
+	]
+}

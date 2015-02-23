@@ -13,7 +13,8 @@
     "min_width": 400,
     "min_height": 420,
     "max_width": 400,
-    "max_height": 420
+    "max_height": 420,
+    "icon": "images/icon.png"
   },
   "chromium-args": "--child-clean-exit"
 }

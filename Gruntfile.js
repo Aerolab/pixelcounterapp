@@ -87,12 +87,6 @@ module.exports = function (grunt) {
       },
       server: '.tmp'
     },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      files: '<%= config.app %>/js/*.js'
-    },
     copy: {
       appLinux: {
         files: [{
@@ -191,7 +185,10 @@ module.exports = function (grunt) {
           cwd: '<%= config.app %>',
           dest: '<%= config.dist %>',
           src: [
-            '**'
+            '**',
+            '!**/bower_components/**',
+            '!**/templates/**',
+            '!**/styles/**'
           ]
         }]
       },
@@ -201,6 +198,13 @@ module.exports = function (grunt) {
         cwd: '<%= config.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      vendor: {
+        expand: true,
+        dot: true,
+        cwd: '.tmp/concat/styles/',
+        dest: '<%= config.dist %>/styles/',
+        src: 'vendor.css'
       }
     },
     compress: {
@@ -249,28 +253,28 @@ module.exports = function (grunt) {
     watch: {
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', '<%= config.app %>/bower_components/{,*/}*.{scss,sass}'],
-        tasks: ['sass:dist', 'autoprefixer:dist']
+        tasks: ['sass:dist', 'autoprefixer:dist' , 'copy:vendor']
       },
       assemble: {
         files: ['<%= config.app %>/templates/layouts/{,*/}*.hbs',
              '<%= config.app %>/templates/pages/{,*/}*.hbs',
              '<%= config.app %>/templates/partials/{,*/}*.hbs',
              '<%= config.app %>/data/{,*/}*.json'],
-        tasks: ['assemble:dist']
+        tasks: ['assemble:dist', 'useminPrepare', 'concat:generated', 'uglify:generated', 'usemin']
       },
       scripts: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['jshint', 'jscs']
+        tasks: ['copy:dist' ,'jshint', 'jscs']
       },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '{.tmp,<%= config.app %>}/*.html',
-          '.tmp/styles/{,*/}*.css',
-          '{.tmp,<%= config.app %>}/scripts/{,*/}*.js',
-          '<%= config.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
+          '{.tmp,<%= config.dist %>,<%= config.app %>}/*.html',
+          '{.tmp,<%= config.dist %>}/styles/{,*/}*.css',
+          '{.tmp,<%= config.dist %>,<%= config.app %>}/scripts/{,*/}*.js',
+          '{<%= config.dist %>,<%= config.app %>}/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
         ]
       }
     },
@@ -300,13 +304,14 @@ module.exports = function (grunt) {
         port: 8000,
         livereload: 35729,
         // change this to '0.0.0.0' to access the server from outside
-        // hostname: '0.0.0.0'
+        hostname: '0.0.0.0'
       },
       livereload: {
         options: {
-          open: true,
+          open: false,
           base: [
             '.tmp',
+            '<%= config.dist %>',
             '<%= config.app %>'
           ] ,
           middleware: function(connect, options) {
@@ -397,7 +402,7 @@ module.exports = function (grunt) {
     wiredep: {
       target: {
         src: ['<%= config.app %>/templates/partials/scripts.hbs','<%= config.app %>/templates/layouts/layout.hbs'],
-        ignorePath: '<%= config.app %>/'
+        ignorePath: '../../'
       }
     },
     useminPrepare: {
@@ -448,6 +453,18 @@ module.exports = function (grunt) {
         uglify: true
       }
     },
+    jshint: {
+      dev: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        files: {
+          src: [
+            'app/scripts/**/*.js'
+          ]
+        }
+      }
+    },
     jscs: {
       dev: {
         options: {
@@ -477,6 +494,13 @@ module.exports = function (grunt) {
         destCss: 'app/styles/modules/_icons.css'
       }
     }
+  });
+
+  grunt.registerTask('runnw', 'Run node-webkit app.', function () {
+    var childProcess = require('child_process');
+    var exec = childProcess.exec;
+    // Todo: detect OS and run specific binary
+    exec('resources/node-webkit/MacOS64/node-webkit.app/Contents/MacOS/node-webkit dist/');
   });
 
   grunt.registerTask('chmod32', 'Add lost Permissions.', function () {
@@ -678,9 +702,19 @@ module.exports = function (grunt) {
   grunt.registerTask('watch-build', function () {
 
     grunt.task.run([
+      'clean:dist',
       'sass:dist',
+      'htmlmin',
       'assemble:dist',
+      'useminPrepare',
+      'concat:generated',
+      'uglify:generated',
       'copy:dist',
+      'modernizr',
+      'usemin',
+      'copy:vendor',
+      'connect:livereload',
+      'runnw',
       'watch'
     ]);
   });
