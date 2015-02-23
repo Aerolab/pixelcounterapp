@@ -5,6 +5,14 @@
   bottom: 0
   z-index: 10
   background: rgba(black,.65)
+  transform: translateY(-10px)
+  opacity: 0
+  transition: all .3s ease-in
+  visibility: hidden
+  &.show
+    visibility: visible
+    opacity: 1
+    transform: translateY(0)
   .setting
     @include vertical-align
     margin: 0 auto

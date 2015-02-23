@@ -1,16 +1,36 @@
-.draggable
+.firsteps
+  height: 373px
+  opacity: 0
+  transform: translateY(-10px)
+  transition: all .3s ease-in
+  visibility: hidden
+  &.show
+    visibility: visible
+    opacity: 1
+    transform: translateY(0)
+#dropArea
   width: 100%
   height: 305px
-  &.dropped
+  &.folderin
     .intructions
       .wrapper-icon
         img
           filter: grayscale(0%)
-        p .quantity
-          font-size: 11px
-          color: #575c6f
-  &.dropped,
-  &.drophere
+        p
+          width: 95%
+          .quantity
+            font-size: 11px
+            color: #575c6f
+            // opacity: 0
+            // transform: translateY(-10px)
+            // transition: all .3s ease-in
+            // visibility: hidden
+            // &.show
+            //   visibility: visible
+            //   opacity: 1
+            //   transform: translateY(0)
+  &.folderin,
+  &.drophover
     .intructions
       &:after
         opacity: .5
@@ -48,6 +68,20 @@
         font-size: 12px
         font-weight: bold
         margin: 0 auto
+
+.onDragfold,
+.onDrophover,
+.onFolderin
+  display: none
+.dragfold
+  .onDragfold
+    display: block
+.drophover
+  .onDrophover
+    display: block
+.folderin
+  .onFolderin
+    display: block
 .start
   display: block
   width: 390px
@@ -61,7 +95,7 @@
   font-weight: bold
   font-size: 12px
   position: absolute
-  bottom: 6px
+  bottom: 3px
   left: 0
   right: 0
   &.disable

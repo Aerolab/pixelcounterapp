@@ -1,0 +1,48 @@
+<section class="firsteps show">
+  {{!--
+    Dragstate
+    class's none=dragfold, drophere=drophover, dropped=folderin
+  --}}
+  <article id='dropArea' class="dragfold">
+
+    <div class="intructions">
+      <figure class="wrapper-icon">
+
+        {{!-- Start --}}
+        <div class="onDragfold">
+
+          <img src="images/folder.svg" alt="">
+          <p class="description">
+            Drag folder to count
+          </p>
+
+        </div>
+
+        {{!-- Drophere --}}
+        <div class="onDrophover">
+
+          <img src="images/arrow.png" alt="">
+          <p class="description">
+            Drop here :)
+          </p>
+
+        </div>
+
+        {{!-- Folder --}}
+        <div class="onFolderin">
+
+          <img src="images/folder.svg" alt="">
+          <p class="description">
+            <spam class="title"></spam>
+            <br>
+            {{!-- <spam class="quantity"><span class="number"></span> images</spam> --}}
+          </p>
+
+        </div>
+
+      </figure>
+    </div>
+
+  </article>
+  <a class="start disable" title="Start Counting">Start Counting</a>
+</section>

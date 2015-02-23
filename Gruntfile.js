@@ -714,7 +714,7 @@ module.exports = function (grunt) {
       'usemin',
       'copy:vendor',
       'connect:livereload',
-      'runnw',
+      // 'runnw',
       'watch'
     ]);
   });
