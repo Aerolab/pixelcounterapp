@@ -7,19 +7,36 @@ var dropArea = document.getElementById('dropArea');
 var titleFolder = $('.onFolderin .title, .finish .folder .name');
 var quantityFolder = $('.onFolderin .quantity');
 var quantityNumberFolder = $('.onFolderin .quantity .number');
+var namesFolders = new Array();
+var pathsFolders = new Array();
 var dragged;
+
+// window stop drag
+window.addEventListener("dragover",function(e){
+  e = e || event;
+  e.preventDefault();
+},false);
+window.addEventListener("drop",function(e){
+  e = e || event;
+  e.preventDefault();
+},false);
 
 /* events fired on the draggable target */
 dropArea.ondrag = function(event) {
-
+  event.preventDefault();
+  event.stopPropagation();
 };
 
 dropArea.ondragstart = function(event) {
+  event.preventDefault();
+  event.stopPropagation();
   dropArea.className = 'drophover';
   console.log('dropstart');
 };
 
 dropArea.ondragend = function(event) {
+  event.preventDefault();
+  event.stopPropagation();
   dropArea.className = 'dragfold';
   console.log('dragend');
 };
@@ -27,29 +44,30 @@ dropArea.ondragend = function(event) {
 /* events fired on the drop targets */
 dropArea.ondragover = function(event) {
   event.preventDefault();
+  event.stopPropagation();
   console.log('dragover');
 };
 
 dropArea.ondragenter = function(event) {
+  event.preventDefault();
+  event.stopPropagation();
   dropArea.className = 'drophover';
   console.log('dropstart');
 
 };
 
 dropArea.ondragleave = function(event) {
-  // dropArea.className = 'dragfold';
+  event.preventDefault();
+  event.stopPropagation();
   console.log('dragleave');
 
 };
 
 dropArea.ondrop = function(event) {
   event.preventDefault();
-
+  event.stopPropagation();
   dropArea.className = 'folderin';
   console.log('folderin');
-
-  var namesFolders = new Array();
-  var pathsFolders = new Array();
 
   for( var i = 0; i < event.dataTransfer.files.length; i++ ) {
 
@@ -58,6 +76,7 @@ dropArea.ondrop = function(event) {
     namesFolders.push(item.name);
     // Add paths folder
     pathsFolders.push(item.path);
+
   }
   // Mostrar el nombre de las carpetas
   if (namesFolders.length > 2) {
@@ -65,16 +84,17 @@ dropArea.ondrop = function(event) {
   }else{
     titleFolder.text( namesFolders.join(', ') );
   }
-  // Press Start
-  $('.start').click(function(event) {
-    event.preventDefault();
-    // if droparea has folder in.
-    if ($('#dropArea').hasClass('folderin')) {
-      initCount(pathsFolders);
-    };
-  });
 
 };
+
+// Press Start
+$('.start').click(function(event) {
+  event.preventDefault();
+  // if droparea has folder in.
+  if ($('#dropArea').hasClass('folderin')) {
+    initCount(pathsFolders);
+  };
+});
 
 
 // Odometer and counter
@@ -83,9 +103,9 @@ dropArea.ondrop = function(event) {
   odometer = new Odometer({
     el: countReduced,
     value: 0,
-    format: 'd',
+    format: '.ddd',
     duration: 1500,
-    theme:'default'
+    theme:'minimal'
   });
   odometer.render();
 
@@ -95,10 +115,15 @@ dropArea.ondrop = function(event) {
 var initCount = function (pathsFolders) {
   // Show View On Count
   $('.oncount').addClass('show');
+  // Filter extensions
+  var formats = $(".filter .extensions:checked").map(function(){
+      return $(this).val();
+    }).get();
+  console.log(formats);
   // Start pixel counter
   for (dir in pathsFolders) {
     console.log('arranco con la carpeta: '+pathsFolders[dir]);
-    pixelcounter.start(pathsFolders[dir], availableFormats, onCount, onEnd);
+    pixelcounter.start(pathsFolders[dir], formats, onCount, onEnd);
   }
 }
 var interval;
@@ -131,6 +156,10 @@ var updateFinish = function (pixelsFinish) {
   var reduced = abbrNum(pixelsFinish);
   var number = reduced.n;
   var letter = reduced.l;
+  // Format number
+  number = number.toFixed(0).replace(/./g, function(c, i, a) {
+                return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+            });
   // Update odometer
   $('.result .reduced .number').text(number);
   $('.result .reduced .unit').text(letter);
@@ -147,7 +176,7 @@ function abbrNum(number) {
     for (var i=abbrev.length-1; i>=0; i--) {
         // Convert array index to "1000", "1000000", etc
         var size = Math.pow(10,(i+1)*3);
-        // If the number is bigger or equal do the abbreviation
+        // If the number is bigger or equal do the abbreviation, ej. "10.000 K" -> "10 M"
         if(size+'0' <= number) {
              result.n = parseInt(number/size);
              // Add the letter for the abbreviation
@@ -162,27 +191,35 @@ function abbrNum(number) {
 }
 
 // Show Finish
+var resetOnCount = function () {
+  console.log('reset On Count');
+  pixelsProgress = null;
+  odometer.update(0);
+  $('.count .reduced .unit').text('');
+  $('.count .full .number').text('');
+};
 // OnEnd
-var onEnd = function (p) {
-  console.log(p);
+var onEnd = function (finishCount) {
   console.log('termine');
-  clearInterval(interval);
-  pixelsProgress=null;
+  console.log(finishCount);
+  // Clear interval
+  // clearInterval(interval);
   // Update Finish
-  updateFinish(p);
+  updateFinish(finishCount);
   // Show Finish
   $('.oncount').removeClass('show');
   $('.finish').addClass('show');
 }
 // Start Over
 var resetFirstep = function () {
+  resetOnCount();
   dropArea.className = 'dragfold';
-
+  while (namesFolders.length > 0) {namesFolders.shift();};
+  while (pathsFolders.length > 0) {pathsFolders.shift();};
 };
 
 $('.start-over').click(function(event) {
   event.preventDefault();
   $('.finish').removeClass('show');
-  dropArea.className = 'dragfold';
-  // $('.finish').addClass('show');
+  resetFirstep();
 });

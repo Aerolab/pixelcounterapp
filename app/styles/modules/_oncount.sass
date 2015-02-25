@@ -19,8 +19,14 @@
     position: absolute
     top: 0
     z-index: 2
-    background: url(../images/background_oncount.png) 50% 50% no-repeat
-    background-size: cover
+    background: url(../images/background_oncount.png)
+    background-position: 0% 0%
+    background-repeat: repeat-y
+    background-size: 100% auto
+    animation-duration: 1000s
+    animation-name: background_oncount
+    animation-timing-function: linear
+    animation-iteration-count: infinite
 .count,
 .result
   @include vertical-align
@@ -33,11 +39,13 @@
     font-size: 64px
     color: white
   .unit
+    text-transform: uppercase
     position: relative
-    bottom: -3px
+    bottom: -1px
   .full
     font-size: 12px
     font-weight: bold
 .result
   .unit
     bottom: 0px
+

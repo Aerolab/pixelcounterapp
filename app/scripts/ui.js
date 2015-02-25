@@ -19,6 +19,12 @@ $('#debug').click(function(event) {
   win.showDevTools();
 });
 
+// Setting
+$('#setting').click(function(event) {
+  event.preventDefault();
+  $('.modal').addClass('show');
+});
+
 // Minimize app
 $('#minimize').click(function(event) {
   event.preventDefault();
@@ -29,3 +35,4 @@ $('#close').click(function(event) {
   event.preventDefault();
   gui.App.quit();
 });
+
