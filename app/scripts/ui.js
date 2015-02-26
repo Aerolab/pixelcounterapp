@@ -1,3 +1,5 @@
+'use strict'; // I have eggs
+
 // Dev Tools
 var gui = require('nw.gui');
 var win = gui.Window.get();

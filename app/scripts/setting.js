@@ -13,19 +13,19 @@ $('#save').click(function(event) {
 // Check All
 $('#all').on('change', function () {
   if (this.checked) {
-    $('#none').prop('checked', false)
+    $('#none').prop('checked', false);
     checkall();
   }else{
-    $('#all').prop('checked', true)
+    $('#all').prop('checked', true);
   }
 });
 // Check None
 $('#none').on('change', function () {
   if (this.checked) {
-    $('#all').prop('checked', false)
+    $('#all').prop('checked', false);
     uncheckall();
   }else{
-    $('#none').prop('checked', true)
+    $('#none').prop('checked', true);
   }
 });
 

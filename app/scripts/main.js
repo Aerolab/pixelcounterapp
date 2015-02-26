@@ -1,74 +1,53 @@
 // App
 var pixelcounter = require('pixelcounter');
-var availableFormats = ['bmp', 'gif', 'jpg', 'jpeg', 'png', 'psd', 'tiff', 'webp', 'svg'];
-
 // Drag and Drop
 var dropArea = document.getElementById('dropArea');
+var inputFile = document.getElementById('inputfile');
 var titleFolder = $('.onFolderin .title, .finish .folder .name');
-var quantityFolder = $('.onFolderin .quantity');
-var quantityNumberFolder = $('.onFolderin .quantity .number');
-var namesFolders = new Array();
-var pathsFolders = new Array();
-var dragged;
+var namesFolders = [];
+var pathsFolders = [];
+var pixelsProgress;
 
-// window stop drag
-window.addEventListener("dragover",function(e){
-  e = e || event;
-  e.preventDefault();
-},false);
-window.addEventListener("drop",function(e){
-  e = e || event;
-  e.preventDefault();
-},false);
 
-/* events fired on the draggable target */
-dropArea.ondrag = function(event) {
-  event.preventDefault();
-  event.stopPropagation();
+// Reset's
+var resetVars = function () {
+  pixelsProgress = null;
+  while (namesFolders.length > 0) {namesFolders.shift();}
+  while (pathsFolders.length > 0) {pathsFolders.shift();}
 };
 
+// window stop drag
+window.addEventListener('dragover',function(event){
+  event.preventDefault();
+},false);
+window.addEventListener('drop',function(event){
+  event.preventDefault();
+},false);
+
+// Events handler of DropArea
 dropArea.ondragstart = function(event) {
   event.preventDefault();
   event.stopPropagation();
   dropArea.className = 'drophover';
-  console.log('dropstart');
 };
 
 dropArea.ondragend = function(event) {
   event.preventDefault();
   event.stopPropagation();
   dropArea.className = 'dragfold';
-  console.log('dragend');
-};
-
-/* events fired on the drop targets */
-dropArea.ondragover = function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  console.log('dragover');
 };
 
 dropArea.ondragenter = function(event) {
   event.preventDefault();
   event.stopPropagation();
   dropArea.className = 'drophover';
-  console.log('dropstart');
-
 };
-
-dropArea.ondragleave = function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  console.log('dragleave');
-
-};
-
+// On drop file's
 dropArea.ondrop = function(event) {
   event.preventDefault();
   event.stopPropagation();
+  resetVars();
   dropArea.className = 'folderin';
-  console.log('folderin');
-
   for( var i = 0; i < event.dataTransfer.files.length; i++ ) {
 
     var item = event.dataTransfer.files[i];
@@ -87,70 +66,33 @@ dropArea.ondrop = function(event) {
 
 };
 
-// Press Start
-$('.start').click(function(event) {
-  event.preventDefault();
-  // if droparea has folder in.
-  if ($('#dropArea').hasClass('folderin')) {
-    initCount(pathsFolders);
-  };
-});
+// TODO: New Feature
 
+// On click dropArea
+// dropArea.onclick = function (event) {
+//   event.preventDefault();
+//   event.stopPropagation();
+//   $(inputFile).click();
+// };
 
 // Odometer and counter
-  var countReduced = $('.count .reduced .number')[0];
-  var countFull = $('.count .full .number');
-  odometer = new Odometer({
-    el: countReduced,
-    value: 0,
-    format: '.ddd',
-    duration: 1500,
-    theme:'minimal'
-  });
-  odometer.render();
+var countReduced = $('.count .reduced .number')[0];
+var countFull = $('.count .full .number');
+var odometer = new Odometer({
+  el: countReduced,
+  value: 0,
+  format: '.ddd',
+  duration: 1500,
+  theme:'minimal'
+});
+odometer.render();
 
 // OnCount
-
-// Init Count
-var initCount = function (pathsFolders) {
-  // Show View On Count
-  $('.oncount').addClass('show');
-  // Filter extensions
-  var formats = $(".filter .extensions:checked").map(function(){
-      return $(this).val();
-    }).get();
-  console.log(formats);
-  // Start pixel counter
-  for (dir in pathsFolders) {
-    console.log('arranco con la carpeta: '+pathsFolders[dir]);
-    pixelcounter.start(pathsFolders[dir], formats, onCount, onEnd);
-  }
-}
-var interval;
-// Show Progress
-var pixelsProgress;
 var onCount = function (path, filePixelsArea, pixels) {
   pixelsProgress = pixels;
   // Update full
-  $('.count .full .number').text(pixelsProgress);
-}
-interval = setInterval(function () {
-  if (pixelsProgress) {
-    console.log('pixels contados: '+pixelsProgress);
-    updateOdometer(pixelsProgress);
-  };
-}
-,3000);
-// Update Count
-var updateOdometer = function (pixelsProgress) {
-  var reduced = abbrNum(pixelsProgress);
-  var number = reduced.n;
-  var letter = reduced.l;
-  // Update odometer
-  odometer.update(number);
-  $('.count .reduced .unit').text(letter);
-
-}
+  countFull.text(pixelsProgress);
+};
 // Update Finish
 var updateFinish = function (pixelsFinish) {
   var reduced = abbrNum(pixelsFinish);
@@ -158,20 +100,59 @@ var updateFinish = function (pixelsFinish) {
   var letter = reduced.l;
   // Format number
   number = number.toFixed(0).replace(/./g, function(c, i, a) {
-                return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                return i && c !== ',' && ((a.length - i) % 3 === 0) ? '.' + c : c;
             });
   // Update odometer
   $('.result .reduced .number').text(number);
   $('.result .reduced .unit').text(letter);
   $('.result .full .number').text(pixelsFinish);
 
-}
+};
+
+// OnEnd
+var onEnd = function (finishCount) {
+  // Update Finish
+  updateFinish(finishCount);
+  //
+  // Show Finish
+  $('.oncount').removeClass('show');
+  $('.finish').addClass('show');
+};
+
+// Init Count
+var initCount = function (pathsFolders) {
+  // Show View On Count
+  $('.oncount').addClass('show');
+  // Hide setting
+  $('#setting').hide('100');
+
+  // Filter extensions
+  var formats = $('.filter .extensions:checked').map(function(){
+      return $(this).val();
+    }).get();
+
+  // Start pixel counter
+  pixelcounter.start(pathsFolders, formats, onCount, onEnd);
+
+  // Start Interval
+  startUpdate();
+
+};
+
+// Press Start
+$('.start').click(function(event) {
+  event.preventDefault();
+  // if droparea has folder in.
+  if ($('#dropArea').hasClass('folderin')) {
+    initCount(pathsFolders);
+  }
+});
 // Abbreviations Number
-function abbrNum(number) {
+var abbrNum = function (number) {
     // result Object
-    var result = new Object;
+    var result = {};
     // Enumerate number abbreviations
-    var abbrev = [ "k", "m", "b", "t" ];
+    var abbrev = [ 'k', 'm', 'b', 't' ];
     // Go through the array backwards, so we do the largest first
     for (var i=abbrev.length-1; i>=0; i--) {
         // Convert array index to "1000", "1000000", etc
@@ -184,38 +165,55 @@ function abbrNum(number) {
              break;
         }else{
           result.n = number;
-          result.l = "";
+          result.l = '';
         }
     }
     return result;
+};
+
+// Update Count
+var updateOdometer = function (pixelsProgress) {
+  var reduced = abbrNum(pixelsProgress);
+  var number = reduced.n;
+  var letter = reduced.l;
+  // Update odometer
+  odometer.update(number);
+  $('.count .reduced .unit').text(letter);
+
+};
+
+// Interval's
+var interval;
+
+// Start Interval
+function startUpdate () {
+  interval = window.setInterval(function () {
+                if (pixelsProgress) {
+                  updateOdometer(pixelsProgress);
+                }
+              },2000);
+}
+// Stop Interval
+function stopUpdate() {
+  clearInterval(interval);
 }
 
-// Show Finish
+// Reset OnCount
 var resetOnCount = function () {
-  console.log('reset On Count');
-  pixelsProgress = null;
   odometer.update(0);
   $('.count .reduced .unit').text('');
   $('.count .full .number').text('');
 };
-// OnEnd
-var onEnd = function (finishCount) {
-  console.log('termine');
-  console.log(finishCount);
-  // Clear interval
-  // clearInterval(interval);
-  // Update Finish
-  updateFinish(finishCount);
-  // Show Finish
-  $('.oncount').removeClass('show');
-  $('.finish').addClass('show');
-}
+
 // Start Over
 var resetFirstep = function () {
+  // Resets
   resetOnCount();
+  resetVars();
+  // Show setting
+  $('#setting').show('100');
+
   dropArea.className = 'dragfold';
-  while (namesFolders.length > 0) {namesFolders.shift();};
-  while (pathsFolders.length > 0) {pathsFolders.shift();};
 };
 
 $('.start-over').click(function(event) {
