@@ -106,10 +106,19 @@ var updateFinish = function (pixelsFinish) {
   $('.result .reduced .number').text(number);
   $('.result .reduced .unit').text(letter);
   $('.result .full .number').text(pixelsFinish);
+  // Update Shared link
+  var link = encodeURIComponent('http://aerolab.github.io/pixelcounter');
+  var content = encodeURIComponent('I just count '+pixelsFinish+' pixels in Pixel Counter by @aerolab');
+  var title = encodeURIComponent('Pixel Counter App | Power by Aerolab');
+  var image = encodeURIComponent('');
+  var twitterHref = 'http://twitter.com/share?url='+link+'&text='+content+'&hashtags=pixelcounter,aerolab';
+  var facebookHref = 'http://www.facebook.com/sharer/sharer.php?s=100&p[url]='+link+'&p[images][0]='+image+'&p[title]='+title+'&p[summary]='+content;
+  $('.shared-twitter').attr('href', twitterHref);
+  $('.shared-facebook').attr('href', facebookHref);
 
 };
 
-// OnEnd
+// OnEndå
 var onEnd = function (finishCount) {
   // Update Finish
   updateFinish(finishCount);
