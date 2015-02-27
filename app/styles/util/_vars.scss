@@ -1,0 +1,55 @@
+@mixin flex($val) {
+	flex: $val;
+	-webkit-flex: $val;
+	-moz-flex: $val;
+}
+
+@mixin display-flex {
+	display: flex;
+	display: -webkit-flex;
+	-moz-display: flex;
+}
+
+@mixin flex-props($flow, $justify, $content, $items) {
+	flex-flow: $flow;
+	justify-content: $justify;
+	align-content: $content;
+	align-items: $items;
+
+	-webkit-flex-flow: $flow;
+	-webkit-justify-content: $justify;
+	-webkit-align-content: $content;
+	-webkit-align-items: $items;
+
+	-moz-flex-flow: $flow;
+	-moz-justify-content: $justify;
+	-moz-align-content: $content;
+	-moz-align-items: $items;
+}
+
+$header: #091b39;
+
+@mixin grid($square) {
+	.grid-sizer { width: $square; }
+  .item {
+    width: $square;
+    height: $square;
+    background: #f04f30;
+
+    &:nth-child(2) { background: #00c2d3; }
+    &:nth-child(3) { background: #919191; }
+    &:nth-child(4) { background: #f04f30; }
+    &:nth-child(5) { background: #8b392a; }
+    &:nth-child(6) { background: #ffc314; }
+    &:nth-child(7) { background: #dd8585; }
+    &:nth-child(8) { background: #091b39; }
+    &:nth-child(9) { background: #ffc314; }
+    &:nth-child(10) { background: #39bca7; }
+    &:nth-child(11) { background: #f04f30; }
+
+    &.vertical { height: $square * 4; }
+    &.wide { width: $square * 2; }
+    &.wider { width: $square * 5; height: $square * 2; }
+    &.big, &.bigger { width: $square * 2; height: $square * 2; }
+  }
+}
