@@ -1,0 +1,63 @@
+nav
+  padding: 15px
+  -webkit-app-region: drag
+  -webkit-user-select: none
+  cursor: default
+  position: relative
+  z-index: 4
+  &:hover
+    cursor: default
+  // border: solid 1px red
+  @extend .clearfix
+  > *
+    float: left
+  #close,
+  #minimize
+    width: 14px
+    height: 14px
+    float: left
+    -webkit-app-region: no-drag
+    cursor: pointer
+    &:hover
+      cursor: pointer
+  #close
+    margin-right: 7px
+    background: url(../images/close.png) 50% 50% no-repeat
+    background-size: 100%
+    &:hover
+      background: url(../images/close_hover.png) 50% 50% no-repeat
+  #minimize
+    background: url(../images/minimize.png) 50% 50% no-repeat
+    background-size: 100%
+    &:hover
+      background: url(../images/minimize_hover.png) 50% 50% no-repeat
+  .left,
+  .right
+    width: 25%
+  .title-bar
+    font-size: 12px
+    line-height: 12px
+    font-weight: bold
+    color: white
+    width: 50%
+    text-align: center
+    cursor: default
+    &:hover
+      cursor: default
+  #setting,
+  #debug
+    font-size: 17px
+    float: right
+    line-height: 13px
+    cursor: pointer
+    &:hover
+      cursor: pointer
+    i
+      line-height: inherit
+      cursor: pointer
+  #setting
+    margin-left: 7px
+  #debug
+    z-index: 1000
+    position: relative
+    // display: none

@@ -1,17 +1,37 @@
-// *
-// 	box-sizing: border-box
-// 	-moz-box-sizing: border-box
+*
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+  -webkit-user-select: none
+  cursor: default
+a
+  cursor: pointer
 
 html,
 body
-	height: 100%
+  height: 100%
 
 body
-	font-family: 'Open Sans', sans-serif
-	font-size: 16px
-	line-height: 26px
-	-webkit-font-smoothing: antialiased
-	color: #5b5b5f
+  font-family: 'Montserrat', sans-serif
+  font-size: 16px
+  // line-height: 26px
+  -webkit-font-smoothing: antialiased
+  color: rgba(white,.6)
+  width: 100%
+  // letter-spacing: -0.5px
+  overflow: hidden
+.font_number
+  font-family: 'disposabledroid_bbbold', sans-serif
+.odometer.odometer-theme-default
+  font-family: 'disposabledroid_bbbold', sans-serif
+  line-height: inherit
+.wrapper-window
+  border: solid 1px black
+  background: #21242e
+  // @include vertical-align
+  // margin: 0 auto
+  // width: 400px
+  height: 100%
 
 .icon
-	display: inline-block
+  display: inline-block
