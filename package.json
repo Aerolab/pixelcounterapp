@@ -1,6 +1,6 @@
 {
-  "name": "pixelcounter",
-  "version": "0.0.0",
+  "name": "Pixelcounter_App",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/israelmw/pixelcounter",
@@ -14,7 +14,9 @@
     "type": "git",
     "url": "git://github.com/israelmw/pixelcounter.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "pixelcounter": "^1.1.0"
+  },
   "devDependencies": {
     "assemble": "~0.4.42",
     "concat-files": "~0.1.0",

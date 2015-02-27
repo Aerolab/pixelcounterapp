@@ -5,6 +5,14 @@
   bottom: 0
   z-index: 10
   background: rgba(black,.65)
+  transform: translateY(-10px)
+  opacity: 0
+  transition: all .3s ease-in
+  visibility: hidden
+  &.show
+    visibility: visible
+    opacity: 1
+    transform: translateY(0)
   .setting
     @include vertical-align
     margin: 0 auto
@@ -19,10 +27,12 @@
       .left,
       .right
         line-height: 12px
+        height: 13px
         a
           line-height: inherit
           i
             line-height: inherit
+            cursor: pointer
       .right
         text-align: right
     .filter
@@ -40,6 +50,7 @@
         font-size: 11px
         font-weight: bold
         line-height: 14px
+        cursor: pointer
       label[for="all"],
       label[for="none"]
         font-size: 12px

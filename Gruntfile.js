@@ -253,7 +253,7 @@ module.exports = function (grunt) {
     watch: {
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', '<%= config.app %>/bower_components/{,*/}*.{scss,sass}'],
-        tasks: ['sass:dist', 'autoprefixer:dist' , 'copy:vendor']
+        tasks: ['sass', 'autoprefixer:dist','copy:dist' , 'copy:vendor']
       },
       assemble: {
         files: ['<%= config.app %>/templates/layouts/{,*/}*.hbs',
@@ -264,7 +264,7 @@ module.exports = function (grunt) {
       },
       scripts: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['copy:dist' ,'jshint', 'jscs']
+        tasks: ['copy:dist' ,'jshint', 'jscs', 'assemble:dist', 'useminPrepare', 'concat:generated', 'uglify:generated', 'usemin']
       },
       livereload: {
         options: {
@@ -703,10 +703,11 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:dist',
-      'sass:dist',
+      'sass',
       'htmlmin',
       'assemble:dist',
       'useminPrepare',
+      'autoprefixer',
       'concat:generated',
       'uglify:generated',
       'copy:dist',

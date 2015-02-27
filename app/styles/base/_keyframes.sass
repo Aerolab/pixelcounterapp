@@ -1,0 +1,16 @@
+// keyframes mixin
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
++keyframes(background_oncount)
+  0%
+    background-position: 0% 0%
+  100%
+    background-position: 0% -10000%
