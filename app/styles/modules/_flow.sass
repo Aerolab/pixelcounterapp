@@ -7,6 +7,54 @@
 		clear: both
 		position: relative
 		z-index: 2
+	&.is_mobile
+		.container
+			height: initial
+			min-height: initial
+		.shotAnimation
+			width: 100%
+			position: static
+			left: 0
+			margin-left: 0
+			margin-top: 0
+			margin-bottom: 0
+			padding-top: 100px
+			padding-bottom: 100px
+			.shots,
+			.text_column
+				display: block
+				position: relative
+				opacity: 1
+				top: 0
+				left: 0
+				right: 0
+				margin: 0 auto
+				text-align: center
+			.shots
+				margin-bottom: 50px
+		#progressbar,
+		.animationProgress
+			display: none
+		@media screen and (max-width:667px)
+			.shotAnimation 
+				.text_column 
+					width: 60%
+					div
+						padding: 0
+		@media screen and (max-width:384px)
+			.shotAnimation
+				padding-top: 50px 
+				padding-bottom: 50px 
+				.text_column 
+					width: 90%
+				.shots
+					width: 300px
+					height: 310px
+					margin: -10px auto 60px
+					.screen
+						width: 300px
+						height: 310px
+						background-size: cover
 .shotAnimation
 	$width: 1100px
 	width: $width
@@ -27,7 +75,7 @@
 			padding-left: 43px
 			padding-right: 43px
 		&.left
-			left: 0
+			left: -40px
 	&.skrollable-between
 		position: fixed
 		top: 50%
@@ -39,46 +87,27 @@
 	display: block
 	width: 500px
 	height: 510px
-	position: relative
 	background-position: center
 	background-repeat: no-repeat
+	position: absolute
+	left: 0px
+	top: 20px
+	&.right
+		right: -100px
+		left: initial
 	.screen
 		width: 500px
 		height: 510px
 		position: absolute
 		top: 43px
 		left: 0px
-		.lightbox
-			width: 100%
-			height: 100%
-			background: rgba(0,0,0,0.8)
-			div
-				width: 100%
-				height: 100%
-				position: absolute
-				top: 0
-				left: 0
-				margin-left: 0
-				background-position: center
-				background-repeat: no-repeat
-				background-size: 100%
 		&.screenA
 			background: url('../images/step_1.png') 50% 50% no-repeat
 		&.screenB
 			background: url('../images/step_2.png') 50% 50% no-repeat
 		&.screenC
 			background: url('../images/step_3.png') 50% 50% no-repeat
-		.touch
-			width: 20px
-			height: 20px
-			background: rgba(255,255,255,0.2)
-			border-radius: 50%
-			position: absolute
-			top: 227px
-			left: 95px
-			border: 4px solid rgba(255,255,255,0.3)
-	
-
+		
 .animationProgress
 	position: absolute
 	top: -100px
@@ -133,7 +162,6 @@
 		&.progress
 			z-index: -1
 			background: #54c15e
-
 #progressbar
 	margin-bottom: 30px
 	overflow: hidden

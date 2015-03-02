@@ -40,5 +40,29 @@
 				opacity: .9
 		.description
 			font-size: 10px 
-
-
+	@media screen and (max-width:768px)
+		height: 60%
+	@media screen and (max-width:667px)
+		height: 100%
+		.wrapper
+			width: 95% 
+			height: 100px
+			> .clearfix
+				width: 45%
+				float: right
+				&:first-child
+					margin-bottom: 0
+					float: left
+	@media screen and (max-width:560px)
+		.wrapper
+			width: 85% 
+			height: auto
+			> .clearfix
+				width: 100%
+				float: none
+				&:first-child
+					margin-bottom: 10px
+					float: none
+	@media screen and (max-width:320px)
+		.wrapper
+			width: 80% 
