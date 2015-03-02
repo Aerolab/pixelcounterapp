@@ -2,3 +2,43 @@
 	width: 100%
 	height: 100%
 	background: #282b38
+	.wrapper
+		width: 380px
+		padding: 0
+		@include vertical-align
+		> .clearfix:first-child
+			margin-bottom: 48px
+	.dist
+		width: 110px
+		float: left
+		text-align: center
+		&:nth-child(2)
+			float: right
+		figure
+			width: 110px
+			height: 100px
+			margin: 0
+		img
+			max-width: 50%
+			@include vertical-align
+		.download
+			display: block
+			width: 100%
+			height: 35px
+			font-size: 12px
+			line-height: 35px
+			font-weight: bold
+			background: #d55757
+			color: white
+			text-align: center
+			margin-top: 0px
+			margin-bottom: 0px
+			cursor: pointer
+			text-decoration: none
+			transition: all .2s ease
+			&:hover 
+				opacity: .9
+		.description
+			font-size: 10px 
+
+
