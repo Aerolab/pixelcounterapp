@@ -10,4 +10,10 @@ $(function() {
       var s = skrollr.init({forceHeight: false});
     }
   }
+
+  $('.all').click(function(event) {
+    event.preventDefault();
+    $.scrollTo($('section.download'),2000);
+  });
+
 });
