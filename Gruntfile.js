@@ -16,12 +16,12 @@ module.exports = function (grunt) {
   // configurable paths
   var config = {
     app: 'app',
-    dist: 'dist',
-    distMac32: 'dist-nw/MacOS32',
-    distMac64: 'dist-nw/MacOS64',
-    distLinux32: 'dist-nw/Linux32',
-    distLinux64: 'dist-nw/Linux64',
-    distWin: 'dist-nw/Win',
+    build: 'build',
+    distMac32: 'dist/MacOS32',
+    distMac64: 'dist/MacOS64',
+    distLinux32: 'dist/Linux32',
+    distLinux64: 'dist/Linux64',
+    distWin: 'dist/Win',
     tmp: 'buildTmp',
     resources: 'resources'
   };
@@ -29,14 +29,13 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     clean: {
-      dist: {
+      build: {
         files: [{
           dot: true,
           src: [
-            '.tmp',
-            '<%= config.dist %>/*',
+            '<%= config.build %>/*',
             '<%= config.tmp %>/*',
-            '!<%= config.dist %>/.git*'
+            '!<%= config.build %>/.git*'
           ]
         }]
       },
@@ -84,14 +83,13 @@ module.exports = function (grunt) {
             '<%= config.tmp %>/*'
           ]
         }]
-      },
-      server: '.tmp'
+      }
     },
     copy: {
       appLinux: {
         files: [{
           expand: true,
-          cwd: '<%= config.dist %>',
+          cwd: '<%= config.build %>',
           dest: '<%= config.distLinux64 %>/app.nw',
           src: '**'
         }]
@@ -99,7 +97,7 @@ module.exports = function (grunt) {
       appLinux32: {
         files: [{
           expand: true,
-          cwd: '<%= config.dist %>',
+          cwd: '<%= config.build %>',
           dest: '<%= config.distLinux32 %>/app.nw',
           src: '**'
         }]
@@ -107,7 +105,7 @@ module.exports = function (grunt) {
       appMacos32: {
         files: [{
           expand: true,
-          cwd: '<%= config.dist %>',
+          cwd: '<%= config.build %>',
           dest: '<%= config.distMac32 %>/node-webkit.app/Contents/Resources/app.nw',
           src: '**'
         }, {
@@ -124,15 +122,15 @@ module.exports = function (grunt) {
           src: '*.icns'
         }, {
           expand: true,
-          cwd: '<%= config.dist %>/../node_modules/',
+          cwd: '<%= config.build %>/../node_modules/',
           dest: '<%= config.distMac32 %>/node-webkit.app/Contents/Resources/app.nw/node_modules/',
-          src: '**'
+          src: '**/pixelcounter/**'
         }]
       },
       appMacos64: {
         files: [{
           expand: true,
-          cwd: '<%= config.dist %>',
+          cwd: '<%= config.build %>',
           dest: '<%= config.distMac64 %>/node-webkit.app/Contents/Resources/app.nw',
           src: '**'
         }, {
@@ -149,9 +147,9 @@ module.exports = function (grunt) {
           src: '*.icns'
         }, {
           expand: true,
-          cwd: '<%= config.dist %>/../node_modules/',
+          cwd: '<%= config.build %>/../node_modules/',
           dest: '<%= config.distMac64 %>/node-webkit.app/Contents/Resources/app.nw/node_modules/',
-          src: '**'
+          src: '**/pixelcounter/**'
         }]
       },
       webkit32: {
@@ -178,17 +176,18 @@ module.exports = function (grunt) {
           src: '**'
         }]
       },
-      dist: {
+      build: {
         files: [{
           expand: true,
           dot: true,
           cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>',
+          dest: '<%= config.build %>',
           src: [
             '**',
             '!**/bower_components/**',
             '!**/templates/**',
-            '!**/styles/**'
+            '!**/styles/**',
+            '!**/scripts/**',
           ]
         }]
       },
@@ -196,14 +195,15 @@ module.exports = function (grunt) {
         expand: true,
         dot: true,
         cwd: '<%= config.app %>/styles',
-        dest: '.tmp/styles/',
+        dest: '<%= config.build %>/styles/',
         src: '{,*/}*.css'
       },
-      vendor: {
+      vendorCss: {
+        // This copy is created for Fixed in Usemin
         expand: true,
         dot: true,
         cwd: '.tmp/concat/styles/',
-        dest: '<%= config.dist %>/styles/',
+        dest: '<%= config.build %>/styles/',
         src: 'vendor.css'
       }
     },
@@ -214,7 +214,7 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= config.dist %>',
+          cwd: '<%= config.build %>',
           src: ['**']
         }]
       },
@@ -253,28 +253,27 @@ module.exports = function (grunt) {
     watch: {
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', '<%= config.app %>/bower_components/{,*/}*.{scss,sass}'],
-        tasks: ['sass', 'autoprefixer:dist','copy:dist' , 'copy:vendor']
+        tasks: ['copy:build','sass', 'autoprefixer:build']
       },
       assemble: {
         files: ['<%= config.app %>/templates/layouts/{,*/}*.hbs',
              '<%= config.app %>/templates/pages/{,*/}*.hbs',
-             '<%= config.app %>/templates/partials/{,*/}*.hbs',
-             '<%= config.app %>/data/{,*/}*.json'],
-        tasks: ['assemble:dist', 'useminPrepare', 'concat:generated', 'uglify:generated', 'usemin']
+             '<%= config.app %>/templates/partials/{,*/}*.hbs'],
+        tasks: ['assemble:build', 'useminPrepare', 'usemin']
       },
       scripts: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['copy:dist' ,'jshint', 'jscs', 'assemble:dist', 'useminPrepare', 'concat:generated', 'uglify:generated', 'usemin']
+        tasks: ['copy:build' ,'jshint', 'jscs', 'assemble:build', 'useminPrepare', 'usemin']
       },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '{.tmp,<%= config.dist %>,<%= config.app %>}/*.html',
-          '{.tmp,<%= config.dist %>}/styles/{,*/}*.css',
-          '{.tmp,<%= config.dist %>,<%= config.app %>}/scripts/{,*/}*.js',
-          '{<%= config.dist %>,<%= config.app %>}/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
+          '{<%= config.build %>,<%= config.app %>}/*.html',
+          '{<%= config.build %>}/styles/{,*/}*.css',
+          '{<%= config.build %>,<%= config.app %>}/scripts/{,*/}*.js',
+          '{<%= config.build %>,<%= config.app %>}/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
         ]
       }
     },
@@ -283,19 +282,13 @@ module.exports = function (grunt) {
         flatten: true,
         layout: 'layout.hbs',
         layoutdir: '<%= config.app %>/templates/layouts',
-        assets: 'dist/images',
-        data: ['<%= config.app %>/data/*.{json,yml}'],
+        assets: 'build/images',
         partials: ['<%= config.app %>/templates/partials/*.hbs'],
         helpers: ['handlebars-helpers', 'handlebars-helper-*']
       },
-      dist: {
+      build: {
         files: {
-          '<%= config.dist %>/': ['<%= config.app %>/templates/pages/*.hbs']
-        }
-      },
-      server: {
-        files: {
-          '.tmp/': ['<%= config.app %>/templates/pages/*.hbs']
+          '<%= config.build %>/': ['<%= config.app %>/templates/pages/*.hbs']
         }
       }
     },
@@ -310,8 +303,7 @@ module.exports = function (grunt) {
         options: {
           open: false,
           base: [
-            '.tmp',
-            '<%= config.dist %>',
+            '<%= config.build %>',
             '<%= config.app %>'
           ] ,
           middleware: function(connect, options) {
@@ -333,48 +325,32 @@ module.exports = function (grunt) {
             middlewares.push(connect.directory(directory));
             return middlewares;
           }
-        },
-        // proxies: [
-        //     {
-        //         context: '/',
-        //         host: '0.0.0.0:8000',
-        //         changeOrigin: true
-        //     }
-        // ]
+        }
       },
       test: {
         options: {
           base: [
-            '.tmp',
             'test',
             '<%= config.app %>'
           ]
         }
       },
-      dist: {
+      build: {
         options: {
           open: true,
-          base: '<%= config.dist %>',
+          base: '<%= config.build %>',
           livereload: false
         }
       }
     },
     sass: {
-      dist: {
+      build: {
         options: {
           // style: 'compressed',
           sourcemap: 'none'
         },
         files: {
-          '<%= config.dist %>/styles/main.css' : ['<%= config.app %>/styles/main.sass']
-        }
-      },
-      server: {
-        options: {
-          debugInfo: true
-        },
-        files: {
-          '.tmp/styles/main.css' : ['<%= config.app %>/styles/main.sass']
+          '<%= config.build %>/styles/main.css' : ['<%= config.app %>/styles/main.sass']
         }
       }
     },
@@ -382,20 +358,12 @@ module.exports = function (grunt) {
       options: {
         browsers: ['last 1 version']
       },
-      tmp: {
+      build: {
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
+          cwd: 'build/styles/',
           src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: 'dist/styles/',
-          src: '{,*/}*.css',
-          dest: 'dist/styles/'
+          dest: 'build/styles/'
         }]
       }
     },
@@ -407,19 +375,21 @@ module.exports = function (grunt) {
     },
     useminPrepare: {
       options: {
-        dest: '<%= config.dist %>'
+        root: '<%= config.app %>',
+        dest: '<%= config.build %>',
       },
-      html: '<%= config.dist %>/index.html'
+      html: '<%= config.build %>/index.html'
     },
     usemin: {
       options: {
-        assetsDirs: ['<%= config.dist %>']
+        assetsDirs: ['<%= config.build %>']
       },
-      html: ['<%= config.dist %>/{,*/}*.html'],
-      css: ['<%= config.dist %>/styles/{,*/}*.css']
+      js: ['<%= config.build %>/scripts/{,*/}*.js'],
+      html: ['<%= config.build %>/{,*/}*.html'],
+      css: ['<%= config.build %>/styles/{,*/}*.css']
     },
     htmlmin: {
-      dist: {
+      build: {
         options: {
           /*removeCommentsFromCDATA: true,
           // https://github.com/config/grunt-usemin/issues/44
@@ -435,22 +405,8 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= config.app %>',
           src: '*.html',
-          dest: '<%= config.dist %>'
+          dest: '<%= config.build %>'
         }]
-      }
-    },
-    modernizr: {
-      dist: {
-        devFile: '<%= config.app %>/bower_components/modernizr/modernizr.js',
-        outputFile: '<%= config.dist %>/scripts/vendor/modernizr.js',
-        files: {
-          src: [
-            '<%= config.dist %>/scripts/{,*/}*.js',
-            '<%= config.dist %>/styles/{,*/}*.css',
-            '!<%= config.dist %>/scripts/vendor/*'
-          ]
-        },
-        uglify: true
       }
     },
     jshint: {
@@ -499,8 +455,24 @@ module.exports = function (grunt) {
   grunt.registerTask('runnw', 'Run node-webkit app.', function () {
     var childProcess = require('child_process');
     var exec = childProcess.exec;
-    // Todo: detect OS and run specific binary
-    exec('resources/node-webkit/MacOS64/node-webkit.app/Contents/MacOS/node-webkit dist/');
+    var ext;
+    // Detect OS and run specific binary 'darwin', 'linux' or 'win32'
+    if (process.platform == "darwin") {
+        ext = 'resources/node-webkit/MacOS64/node-webkit.app/Contents/MacOS/node-webkit build/';
+    }
+    else if (process.platform == "linux") {
+        ext = 'resources/node-webkit/Linux64/nw build/';
+    } else if (process.platform == "win32") {
+        ext = 'resources/node-webkit/Windows/nw.exe build/';
+    }
+    else {
+        ext = 'none';
+    }
+    if (ext!='none') {
+      exec(ext);
+    }else{
+      console.log('Not running node-webkit, check task runnw and ejecute node-webkit manually');
+    }
   });
 
   grunt.registerTask('chmod32', 'Add lost Permissions.', function () {
@@ -609,7 +581,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist-linux', [
     'build',
-    'jshint',
+    // 'jshint',
     'clean:distLinux64',
     'copy:appLinux',
     'createLinuxApp:Linux64'
@@ -617,7 +589,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist-linux32', [
     'build',
-    'jshint',
+    // 'jshint',
     'clean:distLinux32',
     'copy:appLinux32',
     'createLinuxApp:Linux32'
@@ -625,7 +597,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist-win', [
     'build',
-    'jshint',
+    // 'jshint',
     'clean:distWin',
     'copy:copyWinToTmp',
     'compress:appToTmp',
@@ -636,7 +608,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist-mac', [
     'build',
-    'jshint',
+    // 'jshint',
     'clean:distMac64',
     'copy:webkit64',
     'copy:appMacos64',
@@ -646,7 +618,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist-mac32', [
     'build',
-    'jshint',
+    // 'jshint',
     'clean:distMac32',
     'copy:webkit32',
     'copy:appMacos32',
@@ -678,42 +650,24 @@ module.exports = function (grunt) {
   });
 
   // Developer Instance
-  grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
-    grunt.task.run([
-      'clean:server',
-      'sass',
-      'copy:styles',
-      'assemble:server',
-      'connect:livereload',
-      'watch'
-    ]);
-  });
-
 
   grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
+    grunt.log.warn('The `server` task has been deprecated. Use `grunt live-build` to start a watch and build.');
+    grunt.task.run(['live-build']);
   });
 
-  grunt.registerTask('watch-build', function () {
-
+  grunt.registerTask('live-build', function () {
     grunt.task.run([
-      'clean:dist',
+      'clean:build',
+      'copy:build',
       'sass',
-      'htmlmin',
-      'assemble:dist',
-      'useminPrepare',
       'autoprefixer',
-      'concat:generated',
-      'uglify:generated',
-      'copy:dist',
-      'modernizr',
+      'assemble:build',
+      'useminPrepare',
+      'concat',
+      'uglify',
       'usemin',
-      'copy:vendor',
+      'copy:vendorCss',
       'connect:livereload',
       'runnw',
       'watch'
@@ -721,18 +675,16 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
-    'clean:dist',
+    'clean:build',
+    'copy:build',
     'sass',
-    'htmlmin',
-    'assemble:dist',
-    'useminPrepare',
     'autoprefixer',
-    'concat:generated',
-    'cssmin:generated',
-    'uglify:generated',
-    'copy:dist',
-    'modernizr',
-    'usemin'
+    'assemble:build',
+    'useminPrepare',
+    'concat',
+    'uglify',
+    'usemin',
+    'copy:vendorCss'
   ]);
 
 

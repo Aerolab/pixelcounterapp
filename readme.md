@@ -1,53 +1,64 @@
-## Pixel Counter
+# PixelCounter App
+[PixelCounter Site](https://aerolab.github.io/pixelcounter)
 
-This app is a pixel counter in folder. Is simple! that count your pixel's from images (*bmp, jpeg, tiff, gif, png, webp, jpg, psd, svg*), just by dragging and dropping them into the app.
+PixelCounter is an open source application for counting the pixels of your images. Is simple and Drag&Drop! this app that count amount pixel's from images of next extensions (*bmp, jpeg, tiff, gif, png, webp, jpg, psd, svg*). 
 
-the project is developing so it is necessary to start as follows.
+the PixelCounter based in [PixelCounter Script](https://github.com/Aerolab/pixelcounter) created by team [Aerolab](https://github.com/Aerolab/) for use in [Culture](http://aerolab.co/culture) section of Aerolab website. This script is small but is powerfull and have usage of CLI.
 
-## Getting Started
+#Fork and tack on 
 
-First of all, you need to install Node.JS (a Javascript platform), which you can download from [http://nodejs.org/download/](http://nodejs.org/download/).
+Based in Node-Webkit to have start develop in few minuts and practic steps.
 
-Now open the Terminal right in that folder. Now weâ€™ll install a couple of dependencies we need for this project:
+If you have a new featured developed in your fork, you can create a pullrequest to add new release of PixelCounter App.
 
-**On Mac**
+
+## Getting Started 
+
+First of all, you need to install Node.JS (a Javascript platform), which you can download from [Download](http://nodejs.org/download/).
+
+Now open the Terminal right in that folder. Now well install a couple of dependencies we need for this project:
+
+**On Mac or Linux**
 ```
 sudo npm install 
 sudo bower install 
-
 ```
 
-**On Windows**
+**On Window**
 ```
 npm install 
 bower install 
-
 ```
 
-**For star the app you have this command**
-```
-grunt watch-build
+## Run App
 
-```
-this command compiled and watch all file in app/, all change is view and compiled newly.
+You have this command for start the app. this command compiled, open and livereload app. Because you app not open, you run manually node-webkit and your app refresh only. read [Documentation](https://github.com/nwjs/nw.js/wiki/How-to-run-apps) of node-webkit.
 
-## Building the desktop app
+**On Mac**
+```
+grunt live-build
+```
+this command compiled and watch all file in app/, all change is view and compiled moment at moment.
+
+
+## Build Dist
 
 
 To test your app you have to build a distribution from it. Depending on your development system you have to use one of the following grunt tasks.
 
-On a linux call
+**for Linux**
 ```
-$ grunt dist-linux # for 64bit
-$ grunt dist-linux32 # for 32bit
+grunt dist-linux # for 64bit
+grunt dist-linux32 # for 32bit
 ```
-On a pc call
+**for Windows**
 ```
-$ grunt dist-win
+grunt dist-win
 ```
-On a mac call
+**for Mac**
 ```
-$ grunt dist-mac # for 64bit
-$ grunt dist-mac32 # for 32bit
-``
+grunt dist-mac # for 64bit
+grunt dist-mac32 # for 32bit
+```
 The resulting application can then be found in the folder dist.
+Once the creation of the package and you could go to start it.
