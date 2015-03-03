@@ -1,0 +1,202 @@
+#flow 
+	background: #e1e1e1
+	.container
+		@extend .clearfix
+		min-height: 3500px
+		height: 3500px
+		clear: both
+		position: relative
+		z-index: 2
+	&.is_mobile
+		.container
+			height: initial
+			min-height: initial
+		.shotAnimation
+			width: 100%
+			position: static
+			left: 0
+			margin-left: 0
+			margin-top: 0
+			margin-bottom: 0
+			padding-top: 100px
+			padding-bottom: 100px
+			.shots,
+			.text_column
+				display: block
+				position: relative
+				opacity: 1
+				top: 0
+				left: 0
+				right: 0
+				margin: 0 auto
+				text-align: center
+			.shots
+				margin-bottom: 50px
+		#progressbar,
+		.animationProgress
+			display: none
+		@media screen and (max-width:667px)
+			.shotAnimation 
+				.text_column 
+					width: 60%
+					div
+						padding: 0
+		@media screen and (max-width:384px)
+			.shotAnimation
+				padding-top: 50px 
+				padding-bottom: 50px 
+				.text_column 
+					width: 90%
+				.shots
+					width: 300px
+					height: 310px
+					margin: -10px auto 60px
+					.screen
+						width: 300px
+						height: 310px
+						background-size: cover
+.shotAnimation
+	$width: 1100px
+	width: $width
+	position: relative
+	left: 50%
+	margin-left: -($width/2)
+	margin-top: 250px
+	margin-bottom: 250px
+	padding-top: 100px
+	padding-bottom: 250px
+	.text_column
+		width: 50%
+		position: absolute
+		top: 180px
+		right: 0
+		color: #282b38
+		div
+			padding-left: 43px
+			padding-right: 43px
+		&.left
+			left: -40px
+	&.skrollable-between
+		position: fixed
+		top: 50%
+		margin-top: -250px
+	&.skrollable-after
+		position: absolute
+		bottom: 80px
+.shots
+	display: block
+	width: 500px
+	height: 510px
+	background-position: center
+	background-repeat: no-repeat
+	position: absolute
+	left: 0px
+	top: 20px
+	&.right
+		right: -100px
+		left: initial
+	.screen
+		width: 500px
+		height: 510px
+		position: absolute
+		top: 43px
+		left: 0px
+		&.screenA
+			background: url('../images/step_1.png') 50% 50% no-repeat
+		&.screenB
+			background: url('../images/step_2.png') 50% 50% no-repeat
+		&.screenC
+			background: url('../images/step_3.png') 50% 50% no-repeat
+		
+.animationProgress
+	position: absolute
+	top: -100px
+	width: 500px
+	left: 50%
+	margin-left: -250px
+	ul
+		margin: 0 auto
+		overflow: hidden
+		counter-reset: step
+		padding: 0
+		li
+			list-style-type: none
+			color: #929293
+			text-align: center
+			text-transform: uppercase
+			font-size: 11px
+			width: 33.33%
+			float: left
+			position: relative
+			&:before
+				content: counter(step)
+				counter-increment: step
+				width: 46px
+				line-height: 46px
+				display: block
+				font-weight: bold
+				font-size: 16px
+				text-align: center
+				color: white
+				background: url('../images/circle_gray.png') 50% 50% no-repeat
+				background-size: cover 
+				margin: 0 auto 5px auto
+				@include transition(all .2s ease)
+			&:first-child:after
+				content: none
+			&.active:before, 
+			&.active:after, 
+			&.skrollable-after:after, 
+			&.skrollable-after:before
+				background: url('../images/circle_green.png') 50% 50% no-repeat
+				background-size: cover
+	.bar
+		content: ''
+		height: 4px
+		background: #c3c3c3
+		position: absolute
+		top: 22px
+		left: 100px
+		right: 100px
+		z-index: -2 
+		&.progress
+			z-index: -1
+			background: #54c15e
+#progressbar
+	margin-bottom: 30px
+	overflow: hidden
+	counter-reset: step
+	li
+		list-style-type: none
+		color: white
+		text-transform: uppercase
+		font-size: 9px
+		width: 33.33%
+		float: left
+		position: relative
+	li:before
+		content: counter(step)
+		counter-increment: step
+		width: 20px
+		line-height: 20px
+		display: block
+		font-size: 10px
+		color: #333
+		background: white
+		border-radius: 3px
+		margin: 0 auto 5px auto
+	li:after
+		content: ''
+		width: 100%
+		height: 2px
+		background: white
+		position: absolute
+		left: -50%
+		top: 9px
+		z-index: -1 
+	li:first-child:after
+		content: none
+	li.active:before,  
+	li.active:after
+		background: #54c15e
+		color: white
