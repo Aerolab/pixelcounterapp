@@ -8,3 +8,4 @@ node_modules
 temp
 tmp/
 dist-nw
+build
