@@ -185,7 +185,8 @@ module.exports = function (grunt) {
         },
         useminPrepare: {
             options: {
-                dest: '<%= yeoman.dist %>'
+                root: '<%= yeoman.app %>',
+                dest: '<%= yeoman.dist %>',
             },
             html: '<%= yeoman.dist %>/index.html'
         },
@@ -332,6 +333,8 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concat',
         'uglify',
+        'usemin',
+        'modernizr',
         'usemin'
     ]);
 
