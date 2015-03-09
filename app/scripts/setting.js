@@ -44,9 +44,9 @@ $('.extensions').on('change', function() {
 // Function checked
 var checkall = function () {
   $('.extensions').prop('checked', true);
-}
+};
 var uncheckall = function () {
   $('.extensions').prop('checked', false);
-}
+};
 
 });

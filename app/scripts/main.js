@@ -66,14 +66,6 @@ dropArea.ondrop = function(event) {
 
 };
 
-// TODO: New Feature
-
-// On click dropArea
-// dropArea.onclick = function (event) {
-//   event.preventDefault();
-//   event.stopPropagation();
-//   $(inputFile).click();
-// };
 
 // Odometer and counter
 var countReduced = $('.count .reduced .number')[0];
@@ -91,7 +83,8 @@ odometer.render();
 var onCount = function (path, filePixelsArea, pixels) {
   pixelsProgress = pixels;
   // Update full
-  countFull.text(pixelsProgress);
+  var number = numPoint(pixelsProgress);
+  countFull.text(number);
 };
 // Update Finish
 var updateFinish = function (pixelsFinish) {
@@ -99,13 +92,21 @@ var updateFinish = function (pixelsFinish) {
   var number = reduced.n;
   var letter = reduced.l;
   // Format number
-  number = number.toFixed(0).replace(/./g, function(c, i, a) {
-                return i && c !== ',' && ((a.length - i) % 3 === 0) ? '.' + c : c;
-            });
+  number = numPoint(number);
+  pixelsFinish = numPoint(pixelsFinish);
   // Update odometer
   $('.result .reduced .number').text(number);
   $('.result .reduced .unit').text(letter);
   $('.result .full .number').text(pixelsFinish);
+  // Update Shared link
+  var link = encodeURIComponent('http://aerolab.github.io/pixelcounter');
+  var content = encodeURIComponent('I just count '+number+letter.toUpperCase()+' ('+pixelsFinish+') pixels in Pixel Counter by @aerolab');
+  var title = encodeURIComponent('Pixel Counter App | Power by Aerolab');
+  var image = encodeURIComponent('');
+  var twitterHref = 'http://twitter.com/share?url='+link+'&text='+content+'&hashtags=pixelcounter,aerolab';
+  var facebookHref = 'http://www.facebook.com/sharer/sharer.php?s=100&p[url]='+link+'&p[images][0]='+image+'&p[title]='+title+'&p[summary]='+content;
+  $('.shared-twitter').attr('href', twitterHref);
+  $('.shared-facebook').attr('href', facebookHref);
 
 };
 
@@ -169,6 +170,12 @@ var abbrNum = function (number) {
         }
     }
     return result;
+};
+// Formated Number
+var numPoint = function (num) {
+  return num.toFixed(0).replace(/./g, function(c, i, a) {
+                return i && c !== ',' && ((a.length - i) % 3 === 0) ? '.' + c : c;
+            });
 };
 
 // Update Count

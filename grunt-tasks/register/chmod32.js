@@ -1,0 +1,15 @@
+/**
+ * chmod32
+ */
+module.exports = function (grunt) {
+
+  grunt.registerTask('chmod32', 'Add lost Permissions.', function () {
+    var fs = require('fs'),
+      path = config.distMac32 + '/PixelCounter.app/Contents/';
+    fs.chmodSync(path + 'Frameworks/node-webkit Helper EH.app/Contents/MacOS/node-webkit Helper EH', '555');
+    fs.chmodSync(path + 'Frameworks/node-webkit Helper NP.app/Contents/MacOS/node-webkit Helper NP', '555');
+    fs.chmodSync(path + 'Frameworks/node-webkit Helper.app/Contents/MacOS/node-webkit Helper', '555');
+    fs.chmodSync(path + 'MacOS/node-webkit', '555');
+  });
+
+};

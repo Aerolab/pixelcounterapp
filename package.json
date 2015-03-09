@@ -15,6 +15,7 @@
     "url": "git://github.com/israelmw/pixelcounter.git"
   },
   "dependencies": {
+    "include-all": "^0.1.6",
     "pixelcounter": "^1.1.0"
   },
   "devDependencies": {
