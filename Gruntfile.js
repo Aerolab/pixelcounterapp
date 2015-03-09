@@ -180,7 +180,7 @@ module.exports = function (grunt) {
         wiredep: {
             target: {
                 src: ['<%= yeoman.app %>/templates/partials/scripts.hbs','<%= yeoman.app %>/templates/layouts/layout.hbs'],
-                ignorePath: '<%= yeoman.app %>/'
+                ignorePath: '../../'
             }
         },
         useminPrepare: {
@@ -193,6 +193,7 @@ module.exports = function (grunt) {
             options: {
                 assetsDirs: ['<%= yeoman.dist %>']
             },
+            js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
         },
@@ -324,17 +325,13 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'copy:dist',
         'sass',
-        'copy',
-        'htmlmin',
+        'autoprefixer',
         'assemble:dist',
         'useminPrepare',
-        'autoprefixer',
-        'concat:generated',
-        'cssmin:generated',
-        'uglify:generated',
-        'copy:dist',
-        'modernizr',
+        'concat',
+        'uglify',
         'usemin'
     ]);
 
