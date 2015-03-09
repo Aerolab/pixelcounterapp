@@ -1,0 +1,1 @@
+window._is_mobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),$(function(){if(1==$("#flow").length)if(_is_mobile)$("#flow").addClass("is_mobile");else{skrollr.init({forceHeight:!1})}$(".all").click(function(a){a.preventDefault(),$.scrollTo($("section.download"),2e3)})});
