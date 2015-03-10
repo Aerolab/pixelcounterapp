@@ -1,6 +1,6 @@
 {
-  "name": "package",
-  "version": "0.0.0",
+  "name": "PixelCounterApp",
+  "version": "0.1.0",
   "dependencies": {
     "modernizr": "~2.8.3",
     "jquery": "~1.11.2",
