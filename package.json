@@ -15,10 +15,10 @@
     "url": "git://github.com/israelmw/pixelcounter.git"
   },
   "dependencies": {
-    "include-all": "^0.1.6",
-    "pixelcounter": "^1.1.0"
+    "pixelcounter": "^1.2.0"
   },
   "devDependencies": {
+    "include-all": "^0.1.6",
     "assemble": "~0.4.42",
     "concat-files": "~0.1.0",
     "grunt": "^0.4.5",
