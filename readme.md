@@ -21,7 +21,7 @@ Now open the Terminal right in that folder. Now well install a couple of depende
 **On Mac or Linux**
 ```
 sudo npm install 
-sudo bower install 
+bower install 
 ```
 
 **On Window**
