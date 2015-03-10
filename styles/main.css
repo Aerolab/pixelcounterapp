@@ -507,7 +507,8 @@ body {
       text-align: center;
       margin-bottom: 5px;
       cursor: pointer;
-      transition: all 0.1s ease; }
+      transition: all 0.1s ease;
+      text-decoration: none; }
       .presentation .cta .download .fa {
         color: #1a8224;
         font-size: 16px;
