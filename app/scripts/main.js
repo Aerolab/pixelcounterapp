@@ -99,7 +99,7 @@ var updateFinish = function (pixelsFinish) {
   $('.result .reduced .unit').text(letter);
   $('.result .full .number').text(pixelsFinish);
   // Update Shared link
-  var link = encodeURIComponent('http://aerolab.github.io/pixelcounter');
+  var link = encodeURIComponent('http://aerolab.github.io/pixelcounterapp');
   var content = encodeURIComponent('I just count '+number+letter.toUpperCase()+' ('+pixelsFinish+') pixels in Pixel Counter by @aerolab');
   var title = encodeURIComponent('Pixel Counter App | Power by Aerolab');
   var image = encodeURIComponent('');
