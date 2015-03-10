@@ -1,5 +1,5 @@
 # PixelCounter App
-[PixelCounter Site](https://aerolab.github.io/pixelcounter)
+[PixelCounter Site](https://aerolab.github.io/pixelcounterapp)
 
 PixelCounter is an open source application for counting the pixels of your images. Is simple and Drag&Drop! this app that count amount pixel's from images of next extensions (*bmp, jpeg, tiff, gif, png, webp, jpg, psd, svg*). 
 
