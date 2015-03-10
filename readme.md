@@ -18,10 +18,10 @@ First of all, you need to install Node.JS (a Javascript platform), which you can
 
 Now open the Terminal right in that folder. Now well install a couple of dependencies we need for this project:
 
-**On Mac or Linux**
+**On Mac**
 ```
 sudo npm install 
-sudo bower install 
+bower install 
 ```
 
 **On Window**
@@ -46,11 +46,6 @@ this command compiled and watch all file in app/, all change is view and compile
 
 To test your app you have to build a distribution from it. Depending on your development system you have to use one of the following grunt tasks.
 
-**for Linux**
-```
-grunt dist-linux # for 64bit
-grunt dist-linux32 # for 32bit
-```
 **for Windows**
 ```
 grunt dist-win
