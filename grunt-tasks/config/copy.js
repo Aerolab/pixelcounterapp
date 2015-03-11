@@ -89,6 +89,11 @@ module.exports = function(grunt) {
       copyWinToTmp: {
         files: [{
           expand: true,
+          cwd: '<%= config.build %>/../node_modules/',
+          dest: '<%= config.build %>/node_modules/',
+          src: 'pixelcounter/**'
+        }, {
+          expand: true,
           cwd: '<%= config.resources %>/node-webkit/Windows/',
           dest: '<%= config.tmp %>/',
           src: '**'
