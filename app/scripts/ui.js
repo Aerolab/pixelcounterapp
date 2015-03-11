@@ -21,12 +21,6 @@ window.onkeydown = function(e) {
   }
 };
 
-// Open links externals
-win.on('new-win-policy', function (frame, url, policy) {
-    gui.Shell.openExternal(url);
-    policy.ignore();
-});
-
 
 // Dev tool
 $('#debug').click(function(event) {
