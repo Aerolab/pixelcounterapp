@@ -809,6 +809,8 @@ body {
       color: inherit;
       text-decoration: none;
       font-size: 10px; }
+    .download .dist a.description {
+      border-bottom: dotted 2px #86888f; }
   @media screen and (max-width: 768px) {
     .download {
       height: 60%; } }
