@@ -806,6 +806,8 @@ body {
       .download .dist .download:hover {
         opacity: 0.9; }
     .download .dist .description {
+      color: inherit;
+      text-decoration: none;
       font-size: 10px; }
   @media screen and (max-width: 768px) {
     .download {
