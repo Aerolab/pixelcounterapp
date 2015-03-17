@@ -100,7 +100,7 @@ var updateFinish = function (pixelsFinish) {
   $('.result .full .number').text(pixelsFinish);
   // Update Shared link
   var link = encodeURIComponent('http://aerolab.github.io/pixelcounterapp');
-  var content = encodeURIComponent('I just count '+number+letter.toUpperCase()+' ('+pixelsFinish+') pixels in Pixel Counter by @aerolab');
+  var content = encodeURIComponent('I just counted '+number+letter.toUpperCase()+' ('+pixelsFinish+') pixels in Pixel Counter by @aerolab');
   var title = encodeURIComponent('Pixel Counter App | Power by Aerolab');
   var image = encodeURIComponent('');
   var twitterHref = 'http://twitter.com/share?url='+link+'&text='+content+'&hashtags=pixelcounter,aerolab';
