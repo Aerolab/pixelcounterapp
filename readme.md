@@ -7,7 +7,7 @@
 
 the PixelCounter based in [PixelCounter Script](https://github.com/Aerolab/pixelcounter) created by team [Aerolab](https://github.com/Aerolab/) for use in [Culture](http://aerolab.co/culture) section of Aerolab website. This script is small but is powerfull and have usage of CLI.
 
-#Fork and tack on 
+# Fork and tack on 
 
 Based in Node-Webkit to have start develop in few minuts and practic steps.
 
